@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Employee Management App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Employee+
+              </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row">
+  <div class="container mx-5 my-5" *ngFor="let item of employees">
+  <div class="card"  style="width: 18rem;">
+    <div class="card-body">
+      <h4 class="card-title">{{item.name}}</h4>
+      <h5 class="card-subtitle mb-2 text-muted">{{item.position}}</h5>
+      <h5 class="card-subtitle mb-2 text-muted">{{item.dept}}</h5>
+      <a href="#" class="card-link" (click)="onEditEmployee(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</a>
+      <a href="#" class="card-link" (click)="onDeleteEmployee(item._id)">Delete</a>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade"   id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{editMode ?'Upatate' : 'Add'}} Employee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form [formGroup]="empForm" (ngSubmit)="onEmpSubmit()">
+                <div class="mb-3">
+                  <label>Enter Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="mb-3">
+                  <label>Enter position</label>
+                  <input type="text" class="form-control" formControlName="position">
+                </div>
+
+                <div class="mb-3">
+                  <label>Enter Dept</label>
+                  <input type="text" class="form-control" formControlName="dept">
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCloseModal()">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >Save changes</button>
+                  </div>
+                </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
